@@ -1,0 +1,30 @@
+{
+  "total": 1,
+  "pass": 0,
+  "fail": 0,
+  "skip": 1,
+  "classes": [
+    "CalculatorTest"
+  ],
+  "envInfo": {
+    "isfw-build-info": {
+      "qaf-Type": "core",
+      "qaf-Revision": "0",
+      "qaf-Build-Time": "27-Feb-2022 14:37:01",
+      "qaf-Version": "3.1"
+    },
+    "run-parameters": {},
+    "execution-env-info": {
+      "java.arch": "64",
+      "java.vendor": "Oracle Corporation",
+      "java.version": "17.0.9",
+      "os.arch": "x86_64",
+      "host": "IS-5342.local",
+      "os.name": "Mac OS X",
+      "user.name": "oksanaturii",
+      "os.version": "15.1"
+    }
+  },
+  "startTime": 1730306440096,
+  "endTime": 1730306440099
+}

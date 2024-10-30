@@ -1,0 +1,13 @@
+{
+  "name": "Default Suite",
+  "status": "fail",
+  "tests": [
+    "DefaultSuite/MobileTesting"
+  ],
+  "total": 1,
+  "pass": 0,
+  "fail": 0,
+  "skip": 1,
+  "startTime": 1730316530844,
+  "endTime": 1730316530849
+}

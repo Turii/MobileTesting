@@ -1,0 +1,65 @@
+name: Android CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+          cache: maven
+
+      - name: Install Android SDK and Emulator
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y openjdk-17-jdk wget unzip curl
+          mkdir -p $HOME/Library/Android/sdk
+          cd $HOME/Library/Android/sdk
+          wget https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip -O cmdline-tools.zip
+          unzip cmdline-tools.zip -d cmdline-tools
+          mkdir cmdline-tools/latest
+          mv cmdline-tools/cmdline-tools/* cmdline-tools/latest/
+          export ANDROID_HOME=$HOME/Library/Android/sdk
+          export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH
+          sdkmanager "platform-tools" "platforms;android-30" "emulator" "system-images;android-30;google_apis;x86_64"
+          yes | sdkmanager --licenses
+
+      - name: Start Android Emulator
+        env:
+          ADB_INSTALL_TIMEOUT: 10
+        run: |
+          echo "no" | avdmanager create avd -n test -k "system-images;android-30;google_apis;x86_64" --force
+          $ANDROID_HOME/emulator/emulator -avd test -no-snapshot-save -no-window -noaudio -gpu swiftshader_indirect &
+
+      - name: Wait for Android Emulator to boot
+        run: |
+          adb wait-for-device
+          adb shell input keyevent 82
+
+      - name: Install Appium
+        run: |
+          npm install -g appium
+          appium -v # Check Appium version
+
+      - name: Start Appium Server
+        run: appium &
+
+      - name: Install Chrome
+        run: sudo apt-get install -y google-chrome-stable
+
+      - name: Build with Maven
+        run: mvn clean package
+
+      - name: Run all Tests
+        run: mvn test

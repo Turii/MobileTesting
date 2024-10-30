@@ -1,0 +1,9 @@
+Feature: Calculator Addition Test
+
+  Scenario: Verify Addition
+    Given user launches the calculator app
+    When user clicks on 2
+    And user clicks on plus
+    And user clicks on 3
+    And user clicks on equals
+    Then result should be 5

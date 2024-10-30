@@ -1,0 +1,22 @@
+{
+  "methods": [
+    {
+      "index": 1,
+      "retryCount": null,
+      "type": "test",
+      "args": [],
+      "metaData": {
+        "description": "",
+        "name": "testAddition",
+        "resultFileName": "TestAddition",
+        "sign": "CalculatorTest.testAddition()[pri:0, instance:CalculatorTest@1d8bd0de]"
+      },
+      "dependsOn": [],
+      "doc": null,
+      "startTime": 1730306440096,
+      "duration": 3,
+      "result": "skip",
+      "passPer": 0.0
+    }
+  ]
+}
